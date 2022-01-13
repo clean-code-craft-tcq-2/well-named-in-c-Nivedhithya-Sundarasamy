@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <assert.h>
-#include "ColorPairCommon.h"
+#include "ColorPair.h"
 
 const char* MajorColorNames[] = {
     "White", "Red", "Black", "Yellow", "Violet"

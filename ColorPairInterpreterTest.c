@@ -1,9 +1,9 @@
 #include <assert.h>
 #include <stdio.h>
-#include "ColorPairCommon.h"
+#include <string.h>
+#include "ColorPair.h"
 
-void testNumberToPair(int pairNumber,
-    enum MajorColor expectedMajor,
+void testNumberToPair(int pairNumber, enum MajorColor expectedMajor,
     enum MinorColor expectedMinor)
 {
     ColorPair colorPair = GetColorPairFromPairNumber(pairNumber);
@@ -14,9 +14,7 @@ void testNumberToPair(int pairNumber,
     assert(colorPair.minorColor == expectedMinor);
 }
 
-void testPairToNumber(
-    enum MajorColor major,
-    enum MinorColor minor,
+void testPairToNumber(enum MajorColor major, enum MinorColor minor,
     int expectedPairNumber)
 {
     ColorPair colorPair;
@@ -27,7 +25,8 @@ void testPairToNumber(
     assert(pairNumber == expectedPairNumber);
 }
 
-void testColorCodeManual() {
+void testColorCodeManual(char expectedColorPair_22_Name[])
+{
 	int NumberOfColorPair = GetNumberOfColorPair();
 	ColorPairSet colorpairset[NumberOfColorPair];
 	ColorPairSet* colorpairsetptr = GetColorCodeManual(colorpairset);
@@ -37,13 +36,15 @@ void testColorCodeManual() {
 		printf("Pair Number: %d Major and Minor Color Names: %s \n",
 			colorpairsetptr[i].PairNumber, colorpairsetptr[i].colorPairNames);
 	}
+	assert(strcmp(colorpairsetptr[22].colorPairNames, expectedColorPair_22_Name) == 0);
 }
 	
 int main() {
-    testNumberToPair(4, WHITE, BROWN);
-    testNumberToPair(5, WHITE, SLATE);
-    testPairToNumber(BLACK, ORANGE, 12);
-    testPairToNumber(VIOLET, SLATE, 25);
-	testColorCodeManual();
-    return 0;
+	testNumberToPair(4, WHITE, BROWN);
+	testNumberToPair(5, WHITE, SLATE);
+	testPairToNumber(BLACK, ORANGE, 12);
+	testPairToNumber(VIOLET, SLATE, 25);
+	char ColorPair_22_Name[] = "Violet Orange";
+	testColorCodeManual(ColorPair_22_Name);
+	return 0;
 }
